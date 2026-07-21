@@ -1,0 +1,233 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer components {
+    .nav-top-link {
+        @apply flex items-center gap-1.5 rounded-md px-3 py-2 font-medium text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950;
+    }
+
+    .nav-menu-link {
+        @apply flex items-center justify-between gap-4 rounded-md px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950;
+    }
+
+    .nav-icon {
+        @apply h-3.5 w-3.5 shrink-0 text-zinc-400;
+    }
+
+    .nav-submenu {
+        @apply pointer-events-none hidden absolute z-50 opacity-0;
+    }
+
+    .nav-submenu-panel {
+        @apply rounded-lg border border-zinc-200 bg-white p-1 shadow-lg;
+    }
+
+    .nav-item:hover > .nav-submenu,
+    .nav-item:focus-within > .nav-submenu {
+        @apply pointer-events-auto block opacity-100;
+    }
+
+    .modal-dialog {
+        @apply fixed left-1/2 top-1/2 m-0 w-[calc(100vw-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border border-zinc-200 bg-white p-0 shadow-xl;
+    }
+
+    .modal-dialog::backdrop {
+        @apply bg-zinc-950/35;
+    }
+
+    .modal-dialog-wide {
+        @apply max-w-2xl;
+    }
+
+    .org-chart-wrap {
+        @apply overflow-x-auto rounded-lg border border-zinc-200 bg-white p-6 shadow-sm;
+    }
+
+    .org-chart,
+    .org-chart ul {
+        @apply flex justify-center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .org-chart ul {
+        @apply relative pt-8;
+    }
+
+    .org-chart li {
+        @apply relative px-3 text-center;
+    }
+
+    .org-chart li::before,
+    .org-chart li::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 1.5rem;
+        border-top: 1px solid rgb(212 212 216);
+    }
+
+    .org-chart li::before {
+        right: 50%;
+    }
+
+    .org-chart li::after {
+        left: 50%;
+        border-left: 1px solid rgb(212 212 216);
+    }
+
+    .org-chart li:only-child::before,
+    .org-chart li:only-child::after {
+        display: none;
+    }
+
+    .org-chart li:first-child::before,
+    .org-chart li:last-child::after {
+        border-top: 0;
+    }
+
+    .org-chart li:last-child::before {
+        border-right: 1px solid rgb(212 212 216);
+        border-radius: 0 6px 0 0;
+    }
+
+    .org-chart li:first-child::after {
+        border-radius: 6px 0 0 0;
+    }
+
+    .org-chart ul::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 2rem;
+        border-left: 1px solid rgb(212 212 216);
+    }
+
+    .org-chart > li::before,
+    .org-chart > li::after,
+    .org-chart > li > ul::before {
+        border-color: rgb(161 161 170);
+    }
+
+    .org-node {
+        @apply relative z-10 mx-auto min-w-52 max-w-72 rounded-lg border border-zinc-200 bg-white p-4 text-left shadow-sm;
+    }
+
+    .knowledge-content {
+        @apply min-w-0 text-base leading-7 text-zinc-800;
+    }
+
+    .knowledge-content > :first-child {
+        margin-top: 0;
+    }
+
+    .knowledge-content > :last-child {
+        margin-bottom: 0;
+    }
+
+    .knowledge-content h1 {
+        @apply mb-6 mt-10 border-b border-zinc-200 pb-3 text-3xl font-bold text-zinc-950;
+    }
+
+    .knowledge-content h2 {
+        @apply mb-4 mt-10 scroll-mt-6 text-2xl font-bold text-zinc-950;
+    }
+
+    .knowledge-content h3 {
+        @apply mb-3 mt-8 scroll-mt-6 text-xl font-semibold text-zinc-950;
+    }
+
+    .knowledge-content h4,
+    .knowledge-content h5,
+    .knowledge-content h6 {
+        @apply mb-2 mt-6 font-semibold text-zinc-950;
+    }
+
+    .knowledge-content p,
+    .knowledge-content ul,
+    .knowledge-content ol,
+    .knowledge-content blockquote,
+    .knowledge-content pre,
+    .knowledge-content table {
+        @apply mb-5;
+    }
+
+    .knowledge-content ul {
+        @apply list-disc pl-6;
+    }
+
+    .knowledge-content ol {
+        @apply list-decimal pl-6;
+    }
+
+    .knowledge-content li {
+        @apply my-1.5 pl-1;
+    }
+
+    .knowledge-content li > ul,
+    .knowledge-content li > ol {
+        @apply mb-0 mt-1.5;
+    }
+
+    .knowledge-content .contains-task-list {
+        @apply list-none pl-0;
+    }
+
+    .knowledge-content .task-list-item {
+        @apply list-none pl-0;
+    }
+
+    .knowledge-content li:has(> input[type='checkbox']) {
+        @apply list-none pl-0;
+    }
+
+    .knowledge-content a {
+        @apply font-medium text-blue-700 underline decoration-blue-300 underline-offset-2 hover:text-blue-900;
+    }
+
+    .knowledge-content blockquote {
+        @apply border-l-4 border-zinc-300 bg-zinc-50 py-2 pl-4 pr-3 italic text-zinc-600;
+    }
+
+    .knowledge-content code {
+        @apply rounded bg-zinc-100 px-1.5 py-0.5 font-mono text-[0.9em] text-zinc-900;
+    }
+
+    .knowledge-content pre {
+        @apply max-w-full overflow-x-auto rounded-md bg-zinc-950 p-4 text-sm leading-6 text-zinc-100;
+    }
+
+    .knowledge-content pre code {
+        @apply bg-transparent p-0 text-inherit;
+    }
+
+    .knowledge-content table {
+        @apply block max-w-full overflow-x-auto border-collapse text-sm;
+    }
+
+    .knowledge-content th {
+        @apply border border-zinc-300 bg-zinc-100 px-3 py-2 text-left font-semibold text-zinc-950;
+    }
+
+    .knowledge-content td {
+        @apply border border-zinc-300 px-3 py-2 align-top;
+    }
+
+    .knowledge-content hr {
+        @apply my-8 border-zinc-200;
+    }
+
+    .knowledge-content input[type='checkbox'] {
+        @apply mr-2 align-middle;
+    }
+}
