@@ -1260,4 +1260,4 @@ Impact:
 - Technical: BOLT starts from a clean root commit without Kodifica history or framework files.
 - Operation: existing private BOLT-derived projects remain valid downstreams and can repoint their upstream remote to the new BOLT repository when adopting future upgrades.
 Pending:
-- Complete independent repository creation, restore Kodifica to its clean framework commit, and verify both remotes.
+- None. BOLT is available at `https://github.com/hounw/BOLT` with green CI; Kodifica was restored to framework-only commit `06e2728`.

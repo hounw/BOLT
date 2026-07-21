@@ -40,13 +40,25 @@ BOLT's MIT license permits private use and modification. Keep the BOLT copyright
 Use these Git remote names consistently:
 
 - `origin`: the company's private repository. Company branches, tags, releases, and deployments come from here.
-- `upstream`: the public BOLT repository. Fetch from it; do not push company work to it.
+- `upstream`: the public BOLT repository at `https://github.com/hounw/BOLT.git`. Fetch from it; do not push company work to it.
 
 Production and staging servers clone only the private `origin`. They should use a read-only deploy key or an equivalent least-privilege credential.
 
 The private repository should be owned by the company organization rather than an employee's personal account. Company access, continuity, and auditability must not depend on one person's account.
 
 Do not use BOLT as a Git submodule, Composer path dependency, or directory periodically overwritten from upstream. The adopted code is the company's application. Normal Git commits record every company change.
+
+### Existing BOLT Downstreams
+
+BOLT was separated from the Kodifica repository before its first public release. Existing private BOLT-derived projects do not need code or database changes. If a project's `upstream` remote still points to `hounw/kodifica`, update only that remote:
+
+```bash
+git remote -v
+git remote set-url upstream https://github.com/hounw/BOLT.git
+git fetch upstream
+```
+
+Do not change the private company `origin`. Review future BOLT changes normally before adopting them.
 
 ## Adoption Workflow
 
@@ -69,7 +81,7 @@ Record the BOLT source URL, tag, and commit in a dedicated BOLT baseline section
 One straightforward workflow is:
 
 ```bash
-git clone [public-bolt-url] [company-project]
+git clone https://github.com/hounw/BOLT.git [company-project]
 cd [company-project]
 git remote rename origin upstream
 git switch -C main [reviewed-bolt-tag]
@@ -93,7 +105,7 @@ An agent must not create, publish, transfer, or change repository visibility wit
 
 ### 3. Turn The Base Into The Company's Product
 
-Make an adoption commit before building new features. Use the files under `templates/` as prompts, but adapt them to the inherited BOLT behavior rather than blindly replacing accurate documentation.
+Make an adoption commit before building new features. Adapt the inherited BOLT documentation to the company rather than blindly replacing accurate behavior.
 
 At minimum:
 
